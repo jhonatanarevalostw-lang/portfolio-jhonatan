@@ -1,0 +1,2587 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Jhonatan Arévalo — Diseñador Digital</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="img/icono-menu.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/icono-menu.png">
+
+
+    <!-- =====================================================
+         GOOGLE FONT — BITTER
+    ====================================================== -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+
+    <!-- =====================================================
+         TAILWIND CSS
+    ====================================================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+
+    <!-- =====================================================
+         CUSTOM CSS
+    ====================================================== -->
+
+    <style>
+        :root {
+            --orange: #FF6700;
+            --black: #111111;
+            --gray: #F7F7F7;
+            --white: #FFFFFF;
+        }
+
+
+        /* =====================================================
+           RESET
+        ====================================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+            background: #ffffff;
+            color: var(--black);
+            font-family: "Bitter", serif;
+            overflow: hidden;
+        }
+
+
+        button,
+        a {
+            font-family: inherit;
+        }
+
+
+        /* =====================================================
+           SCROLLBAR
+        ====================================================== */
+
+        #scrollArea::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+        }
+
+
+        #scrollArea {
+            scrollbar-width: none;
+        }
+
+
+        /* =====================================================
+           LOADER
+        ====================================================== */
+
+        .loader-dot {
+            animation: loaderDots 1.2s infinite ease-in-out;
+        }
+
+
+        .loader-dot:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+
+        .loader-dot:nth-child(2) {
+            animation-delay: .15s;
+        }
+
+
+        .loader-dot:nth-child(3) {
+            animation-delay: .30s;
+        }
+
+
+        @keyframes loaderDots {
+
+            0%,
+            60%,
+            100% {
+                transform: translateY(0);
+                opacity: .35;
+            }
+
+            30% {
+                transform: translateY(-10px);
+                opacity: 1;
+            }
+
+        }
+
+
+        /* =====================================================
+           SCROLL INDICATOR
+        ====================================================== */
+
+        .scroll-dot {
+            animation: scrollDot 2s ease-in-out infinite;
+        }
+
+
+        .scroll-label {
+            animation: scrollLabel 2s ease-in-out infinite;
+        }
+
+
+        @keyframes scrollDot {
+
+            0% {
+                transform: translate(-50%, 0);
+                opacity: 0;
+            }
+
+            15% {
+                opacity: 1;
+            }
+
+            70% {
+                transform: translate(-50%, 68px);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(-50%, 75px);
+                opacity: 0;
+            }
+
+        }
+
+
+        @keyframes scrollLabel {
+
+            0%,
+            100% {
+                opacity: .45;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+        }
+
+
+        /* =====================================================
+           MENU OVERLAY
+        ====================================================== */
+
+        .menu-overlay {
+            transform: translateY(-110%);
+            opacity: 0;
+            visibility: hidden;
+
+            transition:
+                transform .7s cubic-bezier(.77, 0, .18, 1),
+                opacity .4s ease,
+                visibility .7s ease;
+        }
+
+
+        .menu-overlay.open {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+
+        /* =====================================================
+           MENU ITEMS
+        ====================================================== */
+
+        .menu-item {
+            transition:
+                transform .35s ease,
+                opacity .35s ease;
+        }
+
+
+        .menu-item:hover {
+            transform: translateX(12px);
+        }
+
+
+        /* =====================================================
+           SOCIAL
+        ====================================================== */
+
+        .social-link {
+            transition:
+                transform .25s ease,
+                background .25s ease,
+                color .25s ease;
+        }
+
+
+        .social-link:hover {
+            transform: translateY(-4px);
+            background: var(--black);
+            color: var(--orange);
+        }
+
+
+        /* =====================================================
+           CONTACT BUTTON
+        ====================================================== */
+
+        .contact-button {
+            transition: transform .3s ease;
+        }
+
+
+        .contact-button:hover {
+            transform: translateX(-5px);
+        }
+
+
+        /* =====================================================
+           PROJECTS
+        ====================================================== */
+
+        .project-card {
+            transition: transform .4s ease;
+        }
+
+
+        .project-card:hover {
+            transform: translateY(-8px);
+        }
+
+
+        /* =====================================================
+           REDUCE MOTION
+        ====================================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+                scroll-behavior: auto !important;
+            }
+
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         LOADER
+    ====================================================== -->
+
+    <div id="loader"
+        class="fixed inset-0 z-[9999] flex items-center justify-center bg-[#FF6700] transition-opacity duration-700">
+
+        <div class="flex items-center gap-2.5">
+
+            <span class="loader-dot h-2.5 w-2.5 rounded-full bg-[#111111]"></span>
+
+            <span class="loader-dot h-2.5 w-2.5 rounded-full bg-[#111111]"></span>
+
+            <span class="loader-dot h-2.5 w-2.5 rounded-full bg-[#111111]"></span>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         CAJA PRINCIPAL DEL PORTAFOLIO
+
+         ESTA CAJA SE QUEDA FIJA.
+    ====================================================== -->
+
+    <div id="portfolio" class="fixed inset-x-5 top-5 bottom-5 overflow-hidden bg-[#F7F7F7]">
+
+
+        <!-- =================================================
+             HEADER FIJO
+
+             EL HEADER NO HACE SCROLL.
+        ================================================== -->
+
+        <header class="absolute left-0 right-0 top-0 z-[100] px-6 py-6 md:px-10 md:py-7">
+
+            <div class="flex w-full items-center justify-between">
+
+
+                <!-- =================================================
+                     MENÚ
+                ================================================== -->
+
+                <button id="openMenu" type="button" aria-label="Abrir menú"
+                    class="flex cursor-pointer items-center gap-2 bg-transparent md:gap-4">
+
+                    <img src="img/icono-menu.png" alt="" aria-hidden="true"
+                        class="h-8 w-8 object-contain md:h-14 md:w-14">
+
+                    <span class="h-6 w-px bg-[#FF6700] md:h-9"></span>
+
+                    <span class="text-sm font-medium md:text-[21px]">
+                        Menú
+                    </span>
+
+                </button>
+
+
+
+                <!-- =================================================
+                     CONTACTO
+                ================================================== -->
+
+                <a
+                href="mailto:jhonatan.stw@gmail.com"
+                class="flex items-center gap-2 text-sm font-medium md:gap-3 md:text-[21px]">
+            
+                <span class="h-3 w-3 rounded-full bg-[#FF6700] md:h-[22px] md:w-[22px]"></span>
+            
+                <span>
+                    Contáctame
+                </span>
+            
+            </a>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =================================================
+             ÁREA REAL DE SCROLL
+        ================================================== -->
+
+        <main id="scrollArea" class="h-full overflow-x-hidden overflow-y-auto scroll-smooth">
+
+
+            <!-- =================================================
+                 HERO
+            ================================================== -->
+
+            <section id="inicio"
+                class="relative flex min-h-screen items-center bg-[#F7F7F7] px-6 pb-24 pt-36 md:px-16 md:pt-24 lg:px-20">
+
+                <div class="mx-auto w-full max-w-[1600px]">
+
+                    <div class="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
+
+
+                        <!-- TEXTO -->
+
+                        <div class="max-w-4xl">
+
+                            <p class="mb-2 text-[28px] font-light leading-[1.1] md:text-[34px] lg:text-[38px]">
+                                Hola, soy
+                            </p>
+
+
+                            <h1
+                                class="text-[clamp(3.6rem,7vw,7rem)] font-extrabold leading-[.9] tracking-[-0.045em] text-[#FF6700]">
+                                Jhonatan Arévalo
+                            </h1>
+
+
+                            <p class="mt-8 max-w-4xl text-[clamp(1.8rem,3vw,3.2rem)] font-light leading-[1.12]">
+
+                                <strong class="font-extrabold">
+                                    Diseñador digital y creativo
+                                </strong>
+
+                                de Bogotá.
+
+                            </p>
+
+
+                            <p class="mt-3 max-w-2xl text-[clamp(1.35rem,2.2vw,2.25rem)] font-light leading-[1.28]">
+                                Creo experiencias digitales donde el
+                                diseño y la tecnología se encuentran.
+                            </p>
+
+                        </div>
+
+
+
+                        <!-- ILUSTRACIÓN -->
+
+                        <div class="flex items-center justify-center lg:justify-end">
+
+                            <img src="img/Recurso 1@2x.png" alt="Ilustración de Jhonatan Arévalo"
+                                class="block w-[75%] max-w-[650px] object-contain lg:w-[90%]">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     SCROLL INDICATOR
+                ================================================== -->
+
+                <button type="button" onclick="scrollToSection('trabajo')" aria-label="Ir a proyectos"
+                    class="group absolute bottom-7 left-1/2 flex -translate-x-1/2 cursor-pointer flex-col items-center">
+
+                    <span class="scroll-label text-[10px] uppercase tracking-[0.45em] md:text-[11px]">
+                        Scroll
+                    </span>
+
+
+                    <span class="relative mt-4 h-20 w-px overflow-hidden bg-black/20">
+
+                        <span
+                            class="scroll-dot absolute left-1/2 top-0 h-2 w-2 -translate-x-1/2 rounded-full bg-[#FF6700]"></span>
+
+                    </span>
+
+                </button>
+
+            </section>
+
+
+
+            <!-- =================================================
+             TRABAJO / PROYECTOS
+================================================== -->
+
+            <section id="trabajo" class="min-h-screen bg-white px-6 py-28 md:px-16 lg:px-20">
+
+                <div class="mx-auto max-w-[1600px]">
+
+                    <!-- ENCABEZADO -->
+
+                    <p class="mb-5 text-xs uppercase tracking-[0.35em] text-[#FF6700] md:text-sm">
+                        Mi trabajo
+                    </p>
+
+                    <h2 class="text-[clamp(4rem,9vw,9rem)] font-extrabold leading-[.85] tracking-[-0.04em]">
+                        Proyectos
+                    </h2>
+
+                    <p class="mt-8 max-w-2xl text-xl font-light leading-[1.4] md:text-2xl">
+                        Una selección de proyectos donde diseño,
+                        creatividad y tecnología trabajan juntos.
+                    </p>
+
+
+                    <!-- =================================================
+                     GRID DE PROYECTOS
+        ================================================== -->
+
+                    <div class="mt-20 grid gap-6 md:grid-cols-2">
+
+
+                        <!-- =================================================
+                     PROYECTO 01
+================================================== -->
+
+                        <article data-project="project01"
+                            class="project-card group cursor-pointer overflow-hidden bg-white">
+
+                            <!-- IMAGEN -->
+
+                            <div class="relative aspect-[4/3] overflow-hidden bg-[#111111]">
+
+                                <img src="img/proyecto-halloween.jpg" alt="Campaña de Halloween Seguros Bolívar"
+                                    class="h-full w-full object-cover transition duration-700 group-hover:scale-105">
+
+                                <!-- NÚMERO -->
+
+                                <div
+                                    class="absolute left-7 right-7 top-7 flex items-center justify-between md:left-10 md:right-10">
+
+                                    <span class="text-xs tracking-[0.2em] text-[#FF6700] md:text-sm">
+                                        01 / CAMPAÑA DIGITAL
+                                    </span>
+
+                                    <span
+                                        class="text-2xl text-white transition duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
+                                        ↗
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- INFORMACIÓN -->
+
+                            <div class="px-7 py-8 md:px-10 md:py-10">
+
+                                <p class="text-sm font-medium text-[#FF6700]">
+                                    Seguros Bolívar
+                                </p>
+
+                                <h3 class="mt-3 text-4xl font-bold leading-[.95] md:text-5xl">
+                                    Descubre tu disfraz ideal
+                                </h3>
+
+                                <p class="mt-5 max-w-xl text-base font-light leading-[1.4] text-black/70 md:text-lg">
+                                    Experiencia digital interactiva creada para la campaña
+                                    de Halloween de Seguros Bolívar.
+                                </p>
+
+                                <div class="mt-6 flex flex-wrap gap-2">
+
+                                    <span class="border border-black/20 px-3 py-1 text-xs">
+                                        UX/UI
+                                    </span>
+
+                                    <span class="border border-black/20 px-3 py-1 text-xs">
+                                        Experiencia digital
+                                    </span>
+
+                                    <span class="border border-black/20 px-3 py-1 text-xs">
+                                        Dirección de arte
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </article>
+
+
+
+                        <!-- =================================================
+                 PROYECTO 02
+================================================== -->
+
+                        <article data-project="project02"
+                            class="project-card group cursor-pointer overflow-hidden bg-white">
+
+                            <!-- IMAGEN -->
+
+                            <div class="relative aspect-[4/3] overflow-hidden bg-[#F7F7F7]">
+
+                                <img src="img/proyecto_autos.png" alt="Campaña de Autos Seguros Bolívar"
+                                    class="h-full w-full object-cover transition duration-700 group-hover:scale-105">
+
+                                <!-- NÚMERO -->
+
+                                <div
+                                    class="absolute left-7 right-7 top-7 flex items-center justify-between md:left-10 md:right-10">
+
+                                    <span class="text-xs tracking-[0.2em] text-[#FF6700] md:text-sm">
+                                        02 / CAMPAÑA DIGITAL
+                                    </span>
+
+                                    <span
+                                        class="text-2xl text-[#111111] transition duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
+                                        ↗
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- INFORMACIÓN -->
+
+                            <div class="px-7 py-8 md:px-10 md:py-10">
+
+                                <p class="text-sm font-medium text-[#FF6700]">
+                                    Seguros Bolívar
+                                </p>
+
+                                <h3 class="mt-3 text-4xl font-bold leading-[.95] md:text-5xl">
+                                    Autos
+                                </h3>
+
+                                <p class="mt-5 max-w-xl text-base font-light leading-[1.4] text-black/70 md:text-lg">
+                                    Experiencia digital para explicar de forma sencilla
+                                    el proceso de reparación de un vehículo a través
+                                    del seguro.
+                                </p>
+
+                                <div class="mt-6 flex flex-wrap gap-2">
+
+                                    <span class="border border-black/20 px-3 py-1 text-xs">
+                                        UX/UI
+                                    </span>
+
+                                    <span class="border border-black/20 px-3 py-1 text-xs">
+                                        Diseño digital
+                                    </span>
+
+                                    <span class="border border-black/20 px-3 py-1 text-xs">
+                                        Animación
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </article>
+
+
+
+                        <!-- =================================================
+                 PROYECTO 03
+================================================== -->
+
+                        <article data-project="project03"
+                            class="project-card group cursor-pointer overflow-hidden bg-white">
+
+                            <!-- IMAGEN -->
+
+                            <div class="relative aspect-[4/3] overflow-hidden bg-[#F7F7F7]">
+
+                                <img src="img/proyecto_filmorae.png" alt="Sitio web Filmorae"
+                                    class="h-full w-full object-cover transition duration-700 group-hover:scale-105">
+
+                                <!-- NÚMERO -->
+
+                                <div
+                                    class="absolute left-7 right-7 top-7 flex items-center justify-between md:left-10 md:right-10">
+
+                                    <span class="text-xs tracking-[0.2em] text-[#FF6700] md:text-sm">
+                                        03 / WEB
+                                    </span>
+
+                                    <span
+                                        class="text-2xl text-[#111111] transition duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
+                                        ↗
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- INFORMACIÓN -->
+
+                            <div class="px-7 py-8 md:px-10 md:py-10">
+
+                                <p class="text-sm font-medium text-[#FF6700]">
+                                    Filmorae
+                                </p>
+
+                                <h3 class="mt-3 text-4xl font-bold leading-[.95] md:text-5xl">
+                                    Filmorae
+                                </h3>
+
+                                <p class="mt-5 max-w-xl text-base font-light leading-[1.4] text-black/70 md:text-lg">
+                                    Diseño y desarrollo de una experiencia web para
+                                    una compañía de creación audiovisual con inteligencia
+                                    artificial.
+                                </p>
+
+                                <div class="mt-6 flex flex-wrap gap-2">
+
+                                    <span class="border border-black/20 px-3 py-1 text-xs">
+                                        UX/UI
+                                    </span>
+
+                                    <span class="border border-black/20 px-3 py-1 text-xs">
+                                        Diseño web
+                                    </span>
+
+                                    <span class="border border-black/20 px-3 py-1 text-xs">
+                                        Frontend
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </article>
+
+
+
+                        <!-- =================================================
+                 PROYECTO 04
+================================================== -->
+
+                        <article data-project="project04"
+                            class="project-card group cursor-pointer overflow-hidden bg-white">
+
+                            <!-- IMAGEN -->
+
+                            <div class="relative aspect-[4/3] overflow-hidden bg-[#F7F7F7]">
+
+                                <img src="img/proyecto_cuidar.png" alt="Sitio web Cuidar con Sentido"
+                                    class="h-full w-full object-cover transition duration-700 group-hover:scale-105">
+
+                                <!-- NÚMERO -->
+
+                                <div
+                                    class="absolute left-7 right-7 top-7 flex items-center justify-between md:left-10 md:right-10">
+
+                                    <span class="text-xs tracking-[0.2em] text-[#FF6700] md:text-sm">
+                                        04 / WEB
+                                    </span>
+
+                                    <span
+                                        class="text-2xl text-[#111111] transition duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
+                                        ↗
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- INFORMACIÓN -->
+
+                            <div class="px-7 py-8 md:px-10 md:py-10">
+
+                                <p class="text-sm font-medium text-[#FF6700]">
+                                    Cuidar con Sentido
+                                </p>
+
+                                <h3 class="mt-3 text-4xl font-bold leading-[.95] md:text-5xl">
+                                    Cuidar con Sentido
+                                </h3>
+
+                                <p class="mt-5 max-w-xl text-base font-light leading-[1.4] text-black/70 md:text-lg">
+                                    Diseño de una plataforma web para facilitar el acceso
+                                    a servicios de acompañamiento y apoyo psicológico.
+                                </p>
+
+                                <div class="mt-6 flex flex-wrap gap-2">
+
+                                    <span class="border border-black/20 px-3 py-1 text-xs">
+                                        UX/UI
+                                    </span>
+
+                                    <span class="border border-black/20 px-3 py-1 text-xs">
+                                        Diseño web
+                                    </span>
+
+                                    <span class="border border-black/20 px-3 py-1 text-xs">
+                                        Frontend
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </article>
+
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+        CASE STUDIES
+================================================== -->
+
+
+            <!-- =================================================
+        PROYECTO 01 — HALLOWEEN
+================================================== -->
+
+            <div id="project01" class="fixed inset-5 z-[2000] hidden overflow-hidden bg-white">
+
+                <div id="project01Scroll" class="h-full overflow-y-auto overflow-x-hidden scroll-smooth">
+
+                    <!-- HEADER -->
+
+                    <div
+                        class="sticky top-0 z-30 flex items-center justify-between bg-white/95 px-6 py-6 backdrop-blur-md md:px-10 md:py-7">
+
+                        <button type="button" onclick="closeProject('project01')"
+                            class="group flex items-center gap-3 text-sm font-medium uppercase tracking-[0.15em]">
+
+                            <span class="text-xl transition duration-300 group-hover:-translate-x-1">
+                                ←
+                            </span>
+
+                            <span>
+                                Volver
+                            </span>
+
+                        </button>
+
+                        <span class="text-xs tracking-[0.2em] text-[#FF6700]">
+                            01 / 04
+                        </span>
+
+                    </div>
+
+
+                    <!-- HERO -->
+
+                    <div class="px-6 pb-20 md:px-10 md:pb-28">
+
+                        <div class="mx-auto max-w-[1600px]">
+
+                            <p class="text-xs uppercase tracking-[0.3em] text-[#FF6700] md:text-sm">
+                                Seguros Bolívar
+                            </p>
+
+                            <h2
+                                class="mt-5 max-w-6xl text-[clamp(4rem,9vw,9rem)] font-extrabold leading-[.82] tracking-[-0.05em]">
+                                Descubre tu<br>
+                                disfraz ideal
+                            </h2>
+
+                            <div class="mt-10 grid gap-8 border-t border-black/10 pt-8 md:grid-cols-3">
+
+                                <div>
+                                    <p class="text-xs uppercase tracking-[0.2em] text-black/40">
+                                        Proyecto
+                                    </p>
+
+                                    <p class="mt-2 text-lg">
+                                        Campaña de Halloween
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <p class="text-xs uppercase tracking-[0.2em] text-black/40">
+                                        Mi rol
+                                    </p>
+
+                                    <p class="mt-2 text-lg">
+                                        UX/UI · Diseño digital · Dirección de arte
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <p class="text-xs uppercase tracking-[0.2em] text-black/40">
+                                        Tipo
+                                    </p>
+
+                                    <p class="mt-2 text-lg">
+                                        Experiencia interactiva
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- VIDEO -->
+
+                    <div class="px-6 md:px-10">
+
+                        <div class="mx-auto max-w-[1800px] overflow-hidden bg-black">
+
+                            <video class="h-auto w-full" autoplay muted loop playsinline controls>
+
+                                <source src="img/proyectos/disfraz-video.mp4" type="video/mp4">
+
+                            </video>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- DESCRIPCIÓN -->
+
+                    <div class="px-6 py-24 md:px-10 md:py-32">
+
+                        <div class="mx-auto grid max-w-[1400px] gap-12 md:grid-cols-12">
+
+                            <div class="md:col-span-4">
+
+                                <p class="text-xs uppercase tracking-[0.3em] text-[#FF6700]">
+                                    El proyecto
+                                </p>
+
+                            </div>
+
+                            <div class="md:col-span-8">
+
+                                <p class="max-w-4xl text-2xl font-light leading-[1.35] md:text-4xl">
+                                    Una experiencia digital creada para la campaña de
+                                    Halloween de Seguros Bolívar. El usuario responde
+                                    diferentes preguntas para descubrir cuál sería
+                                    su disfraz ideal.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- EXPERIENCIA -->
+
+                    <div class="bg-[#111111] px-6 py-24 text-white md:px-10 md:py-32">
+
+                        <div class="mx-auto max-w-[1400px]">
+
+                            <p class="text-xs uppercase tracking-[0.3em] text-[#FF6700]">
+                                La experiencia
+                            </p>
+
+                            <h3 class="mt-5 max-w-4xl text-4xl font-bold leading-[.95] md:text-7xl">
+                                Convertir una campaña en una experiencia.
+                            </h3>
+
+                            <div class="mt-16 grid gap-6 md:grid-cols-3">
+
+                                <div class="border border-white/20 p-7 md:p-10">
+                                    <span class="text-5xl font-bold text-[#FF6700]">01</span>
+
+                                    <h4 class="mt-10 text-2xl font-bold">
+                                        Conocer
+                                    </h4>
+
+                                    <p class="mt-4 font-light leading-[1.5] text-white/70">
+                                        El usuario comienza respondiendo preguntas
+                                        para definir el contexto de la experiencia.
+                                    </p>
+                                </div>
+
+                                <div class="border border-white/20 p-7 md:p-10">
+                                    <span class="text-5xl font-bold text-[#FF6700]">02</span>
+
+                                    <h4 class="mt-10 text-2xl font-bold">
+                                        Interactuar
+                                    </h4>
+
+                                    <p class="mt-4 font-light leading-[1.5] text-white/70">
+                                        La experiencia utiliza diferentes decisiones
+                                        para construir el resultado.
+                                    </p>
+                                </div>
+
+                                <div class="border border-white/20 p-7 md:p-10">
+                                    <span class="text-5xl font-bold text-[#FF6700]">03</span>
+
+                                    <h4 class="mt-10 text-2xl font-bold">
+                                        Descubrir
+                                    </h4>
+
+                                    <p class="mt-4 font-light leading-[1.5] text-white/70">
+                                        El usuario obtiene el resultado de su disfraz
+                                        ideal dentro de la experiencia.
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- GALERÍA -->
+
+                    <div class="px-6 py-24 md:px-10 md:py-32">
+
+                        <div class="mx-auto max-w-[1600px]">
+
+                            <p class="text-xs uppercase tracking-[0.3em] text-[#FF6700]">
+                                Diseño
+                            </p>
+
+                            <h3 class="mt-5 text-4xl font-bold md:text-6xl">
+                                Una experiencia pensada para Halloween.
+                            </h3>
+
+                            <div class="mt-16">
+
+                                <img src="img/proyectos/halloween.jpg" alt="Diseño de experiencia Halloween"
+                                    class="w-full">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CIERRE -->
+
+                    <div class="bg-[#FF6700] px-6 py-24 md:px-10 md:py-32">
+
+                        <div class="mx-auto max-w-[1400px]">
+
+                            <p class="text-xs uppercase tracking-[0.3em] text-black/60">
+                                Proyecto 01
+                            </p>
+
+                            <h3
+                                class="mt-5 max-w-5xl text-5xl font-extrabold leading-[.9] tracking-[-0.04em] md:text-8xl">
+                                Descubre tu disfraz ideal.
+                            </h3>
+
+                            <button type="button" onclick="closeProject('project01')"
+                                class="mt-12 flex items-center gap-4 border border-black px-6 py-4 text-sm font-medium uppercase tracking-[0.15em] transition duration-300 hover:bg-black hover:text-white">
+
+                                Volver a proyectos
+
+                                <span>↑</span>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+    PROYECTO 02 — AUTOS
+================================================== -->
+
+            <div id="project02" class="fixed inset-5 z-[2000] hidden overflow-hidden bg-white">
+
+                <div id="project02Scroll" class="h-full overflow-y-auto overflow-x-hidden scroll-smooth">
+
+
+                    <!-- HEADER -->
+
+                    <div
+                        class="sticky top-0 z-30 flex items-center justify-between bg-white/95 px-6 py-6 backdrop-blur-md md:px-10 md:py-7">
+
+                        <button type="button" onclick="closeProject('project02')"
+                            class="group flex items-center gap-3 text-sm font-medium uppercase tracking-[0.15em]">
+
+                            <span class="text-xl transition duration-300 group-hover:-translate-x-1">
+                                ←
+                            </span>
+
+                            Volver
+
+                        </button>
+
+                        <span class="text-xs tracking-[0.2em] text-[#FF6700]">
+                            02 / 04
+                        </span>
+
+                    </div>
+
+
+                    <!-- HERO -->
+
+                    <div class="px-6 pb-20 md:px-10 md:pb-28">
+
+                        <div class="mx-auto max-w-[1600px]">
+
+                            <p class="text-xs uppercase tracking-[0.3em] text-[#FF6700] md:text-sm">
+                                Seguros Bolívar
+                            </p>
+
+                            <h2
+                                class="mt-5 max-w-6xl text-[clamp(4rem,9vw,9rem)] font-extrabold leading-[.82] tracking-[-0.05em]">
+                                Autos
+                            </h2>
+
+                            <div class="mt-10 grid gap-8 border-t border-black/10 pt-8 md:grid-cols-3">
+
+                                <div>
+                                    <p class="text-xs uppercase tracking-[0.2em] text-black/40">
+                                        Proyecto
+                                    </p>
+
+                                    <p class="mt-2 text-lg">
+                                        Campaña de autos
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <p class="text-xs uppercase tracking-[0.2em] text-black/40">
+                                        Mi rol
+                                    </p>
+
+                                    <p class="mt-2 text-lg">
+                                        UX/UI · Diseño digital · Animación
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <p class="text-xs uppercase tracking-[0.2em] text-black/40">
+                                        Tipo
+                                    </p>
+
+                                    <p class="mt-2 text-lg">
+                                        Experiencia digital
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- VIDEO -->
+
+                    <div class="px-6 md:px-10">
+
+                        <div class="mx-auto max-w-[1800px] overflow-hidden bg-black">
+
+                            <video class="h-auto w-full" autoplay muted loop playsinline controls>
+
+                                <source src="img/proyectos/autos-video.mp4" type="video/mp4">
+
+                            </video>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- DESCRIPCIÓN -->
+
+                    <div class="px-6 py-24 md:px-10 md:py-32">
+
+                        <div class="mx-auto grid max-w-[1400px] gap-12 md:grid-cols-12">
+
+                            <div class="md:col-span-4">
+
+                                <p class="text-xs uppercase tracking-[0.3em] text-[#FF6700]">
+                                    El proyecto
+                                </p>
+
+                            </div>
+
+                            <div class="md:col-span-8">
+
+                                <p class="max-w-4xl text-2xl font-light leading-[1.35] md:text-4xl">
+                                    Una experiencia digital creada para explicar
+                                    de manera sencilla el proceso que debe seguir
+                                    un cliente cuando necesita reparar su vehículo
+                                    utilizando su seguro.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PROCESO -->
+
+                    <div class="bg-[#111111] px-6 py-24 text-white md:px-10 md:py-32">
+
+                        <div class="mx-auto max-w-[1400px]">
+
+                            <p class="text-xs uppercase tracking-[0.3em] text-[#FF6700]">
+                                El proceso
+                            </p>
+
+                            <h3 class="mt-5 max-w-4xl text-4xl font-bold leading-[.95] md:text-7xl">
+                                Hacer fácil de entender un proceso complejo.
+                            </h3>
+
+                            <div class="mt-16 grid gap-6 md:grid-cols-3">
+
+                                <div class="border border-white/20 p-7 md:p-10">
+
+                                    <span class="text-5xl font-bold text-[#FF6700]">
+                                        01
+                                    </span>
+
+                                    <h4 class="mt-10 text-2xl font-bold">
+                                        Reportar
+                                    </h4>
+
+                                    <p class="mt-4 font-light leading-[1.5] text-white/70">
+                                        El usuario identifica el proceso que debe
+                                        iniciar después de un incidente.
+                                    </p>
+
+                                </div>
+
+
+                                <div class="border border-white/20 p-7 md:p-10">
+
+                                    <span class="text-5xl font-bold text-[#FF6700]">
+                                        02
+                                    </span>
+
+                                    <h4 class="mt-10 text-2xl font-bold">
+                                        Reparar
+                                    </h4>
+
+                                    <p class="mt-4 font-light leading-[1.5] text-white/70">
+                                        Se explica visualmente el proceso relacionado
+                                        con la reparación del vehículo.
+                                    </p>
+
+                                </div>
+
+
+                                <div class="border border-white/20 p-7 md:p-10">
+
+                                    <span class="text-5xl font-bold text-[#FF6700]">
+                                        03
+                                    </span>
+
+                                    <h4 class="mt-10 text-2xl font-bold">
+                                        Continuar
+                                    </h4>
+
+                                    <p class="mt-4 font-light leading-[1.5] text-white/70">
+                                        La experiencia orienta al usuario hacia
+                                        los siguientes pasos.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- GALERÍA -->
+
+                    <div class="px-6 py-24 md:px-10 md:py-32">
+
+                        <div class="mx-auto max-w-[1600px]">
+
+                            <p class="text-xs uppercase tracking-[0.3em] text-[#FF6700]">
+                                Diseño y animación
+                            </p>
+
+                            <h3 class="mt-5 text-4xl font-bold md:text-6xl">
+                                Una experiencia visual para explicar el proceso.
+                            </h3>
+
+                            <div class="mt-16 grid gap-6 md:grid-cols-2">
+
+                                <div class="overflow-hidden bg-[#F7F7F7]">
+
+                                    <img src="img/proyectos/autos.jpg" alt="Campaña de autos Seguros Bolívar"
+                                        class="w-full">
+
+                                </div>
+
+                                <div class="overflow-hidden bg-black">
+
+                                    <video class="h-full w-full object-cover" autoplay muted loop playsinline controls>
+
+                                        <source src="img/proyectos/autos-video.mp4" type="video/mp4">
+
+                                    </video>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CIERRE -->
+
+                    <div class="bg-[#FF6700] px-6 py-24 md:px-10 md:py-32">
+
+                        <div class="mx-auto max-w-[1400px]">
+
+                            <p class="text-xs uppercase tracking-[0.3em] text-black/60">
+                                Proyecto 02
+                            </p>
+
+                            <h3
+                                class="mt-5 max-w-5xl text-5xl font-extrabold leading-[.9] tracking-[-0.04em] md:text-8xl">
+                                Una experiencia para entender el proceso.
+                            </h3>
+
+                            <button type="button" onclick="closeProject('project02')"
+                                class="mt-12 flex items-center gap-4 border border-black px-6 py-4 text-sm font-medium uppercase tracking-[0.15em] transition duration-300 hover:bg-black hover:text-white">
+
+                                Volver a proyectos
+
+                                <span>↑</span>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+    PROYECTO 03 — FILMORAE
+================================================== -->
+
+            <div id="project03" class="fixed inset-5 z-[2000] hidden overflow-hidden bg-white">
+
+                <div id="project03Scroll" class="h-full overflow-y-auto overflow-x-hidden scroll-smooth">
+
+
+                    <!-- HEADER -->
+
+                    <div
+                        class="sticky top-0 z-30 flex items-center justify-between bg-white/95 px-6 py-6 backdrop-blur-md md:px-10 md:py-7">
+
+                        <button type="button" onclick="closeProject('project03')"
+                            class="group flex items-center gap-3 text-sm font-medium uppercase tracking-[0.15em]">
+
+                            <span class="text-xl transition duration-300 group-hover:-translate-x-1">
+                                ←
+                            </span>
+
+                            Volver
+
+                        </button>
+
+                        <span class="text-xs tracking-[0.2em] text-[#FF6700]">
+                            03 / 04
+                        </span>
+
+                    </div>
+
+
+                    <!-- HERO -->
+
+                    <div class="px-6 pb-20 md:px-10 md:pb-28">
+
+                        <div class="mx-auto max-w-[1600px]">
+
+                            <p class="text-xs uppercase tracking-[0.3em] text-[#FF6700] md:text-sm">
+                                Filmorae
+                            </p>
+
+                            <h2
+                                class="mt-5 max-w-6xl text-[clamp(4rem,9vw,9rem)] font-extrabold leading-[.82] tracking-[-0.05em]">
+                                Filmorae
+                            </h2>
+
+                            <div class="mt-10 grid gap-8 border-t border-black/10 pt-8 md:grid-cols-3">
+
+                                <div>
+                                    <p class="text-xs uppercase tracking-[0.2em] text-black/40">
+                                        Proyecto
+                                    </p>
+
+                                    <p class="mt-2 text-lg">
+                                        Diseño de sitio web
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <p class="text-xs uppercase tracking-[0.2em] text-black/40">
+                                        Mi rol
+                                    </p>
+
+                                    <p class="mt-2 text-lg">
+                                        UX/UI · Diseño web · Frontend
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <p class="text-xs uppercase tracking-[0.2em] text-black/40">
+                                        Tipo
+                                    </p>
+
+                                    <p class="mt-2 text-lg">
+                                        Sitio web
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- VIDEO -->
+
+                    <div class="px-6 md:px-10">
+
+                        <div class="mx-auto max-w-[1800px] overflow-hidden bg-black">
+
+                            <video class="h-auto w-full" autoplay muted loop playsinline controls>
+
+                                <source src="img/proyectos/video-hero.mp4" type="video/mp4">
+
+                            </video>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- DESCRIPCIÓN -->
+
+                    <div class="px-6 py-24 md:px-10 md:py-32">
+
+                        <div class="mx-auto grid max-w-[1400px] gap-12 md:grid-cols-12">
+
+                            <div class="md:col-span-4">
+
+                                <p class="text-xs uppercase tracking-[0.3em] text-[#FF6700]">
+                                    El proyecto
+                                </p>
+
+                            </div>
+
+                            <div class="md:col-span-8">
+
+                                <p class="max-w-4xl text-2xl font-light leading-[1.35] md:text-4xl">
+                                    Diseño y desarrollo de una experiencia web para
+                                    Filmorae, un estudio audiovisual que combina
+                                    creatividad, tecnología e inteligencia artificial
+                                    para crear contenido con lenguaje cinematográfico.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- OBJETIVO -->
+
+                    <div class="bg-[#111111] px-6 py-24 text-white md:px-10 md:py-32">
+
+                        <div class="mx-auto max-w-[1400px]">
+
+                            <p class="text-xs uppercase tracking-[0.3em] text-[#FF6700]">
+                                La propuesta
+                            </p>
+
+                            <h3 class="mt-5 max-w-5xl text-4xl font-bold leading-[.95] md:text-7xl">
+                                Una web donde la tecnología y el lenguaje cinematográfico se encuentran.
+                            </h3>
+
+                            <div class="mt-16 grid gap-6 md:grid-cols-3">
+
+                                <div class="border border-white/20 p-7 md:p-10">
+
+                                    <span class="text-5xl font-bold text-[#FF6700]">
+                                        01
+                                    </span>
+
+                                    <h4 class="mt-10 text-2xl font-bold">
+                                        Identidad
+                                    </h4>
+
+                                    <p class="mt-4 font-light leading-[1.5] text-white/70">
+                                        Construir una presencia digital coherente
+                                        con el carácter audiovisual de la marca.
+                                    </p>
+
+                                </div>
+
+
+                                <div class="border border-white/20 p-7 md:p-10">
+
+                                    <span class="text-5xl font-bold text-[#FF6700]">
+                                        02
+                                    </span>
+
+                                    <h4 class="mt-10 text-2xl font-bold">
+                                        Portafolio
+                                    </h4>
+
+                                    <p class="mt-4 font-light leading-[1.5] text-white/70">
+                                        Dar protagonismo a los proyectos audiovisuales
+                                        y facilitar su exploración.
+                                    </p>
+
+                                </div>
+
+
+                                <div class="border border-white/20 p-7 md:p-10">
+
+                                    <span class="text-5xl font-bold text-[#FF6700]">
+                                        03
+                                    </span>
+
+                                    <h4 class="mt-10 text-2xl font-bold">
+                                        Tecnología
+                                    </h4>
+
+                                    <p class="mt-4 font-light leading-[1.5] text-white/70">
+                                        Presentar la inteligencia artificial como parte
+                                        del lenguaje creativo del estudio.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- GALERÍA -->
+
+                    <div class="px-6 py-24 md:px-10 md:py-32">
+
+                        <div class="mx-auto max-w-[1600px]">
+
+                            <p class="text-xs uppercase tracking-[0.3em] text-[#FF6700]">
+                                Diseño web
+                            </p>
+
+                            <h3 class="mt-5 text-4xl font-bold md:text-6xl">
+                                Una experiencia visual construida alrededor del contenido.
+                            </h3>
+
+
+
+                            <a href="https://filmoraeai.com/" target="_blank" rel="noopener noreferrer"
+                                class="mt-10 inline-flex items-center gap-4 border border-black px-6 py-4 text-sm font-medium uppercase tracking-[0.15em] transition duration-300 hover:bg-black hover:text-white">
+
+                                Visitar sitio
+
+                                <span>↗</span>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CIERRE -->
+
+                    <div class="bg-[#FF6700] px-6 py-24 md:px-10 md:py-32">
+
+                        <div class="mx-auto max-w-[1400px]">
+
+                            <p class="text-xs uppercase tracking-[0.3em] text-black/60">
+                                Proyecto 03
+                            </p>
+
+                            <h3
+                                class="mt-5 max-w-5xl text-5xl font-extrabold leading-[.9] tracking-[-0.04em] md:text-8xl">
+                                Filmorae.
+                            </h3>
+
+                            <button type="button" onclick="closeProject('project03')"
+                                class="mt-12 flex items-center gap-4 border border-black px-6 py-4 text-sm font-medium uppercase tracking-[0.15em] transition duration-300 hover:bg-black hover:text-white">
+
+                                Volver a proyectos
+
+                                <span>↑</span>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+    PROYECTO 04 — CUIDAR CON SENTIDO
+================================================== -->
+
+            <div id="project04" class="fixed inset-5 z-[2000] hidden overflow-hidden bg-white">
+
+                <div id="project04Scroll" class="h-full overflow-y-auto overflow-x-hidden scroll-smooth">
+
+
+                    <!-- HEADER -->
+
+                    <div
+                        class="sticky top-0 z-30 flex items-center justify-between bg-white/95 px-6 py-6 backdrop-blur-md md:px-10 md:py-7">
+
+                        <button type="button" onclick="closeProject('project04')"
+                            class="group flex items-center gap-3 text-sm font-medium uppercase tracking-[0.15em]">
+
+                            <span class="text-xl transition duration-300 group-hover:-translate-x-1">
+                                ←
+                            </span>
+
+                            Volver
+
+                        </button>
+
+                        <span class="text-xs tracking-[0.2em] text-[#FF6700]">
+                            04 / 04
+                        </span>
+
+                    </div>
+
+
+                    <!-- HERO -->
+
+                    <div class="px-6 pb-20 md:px-10 md:pb-28">
+
+                        <div class="mx-auto max-w-[1600px]">
+
+                            <p class="text-xs uppercase tracking-[0.3em] text-[#FF6700] md:text-sm">
+                                Cuidar con Sentido
+                            </p>
+
+                            <h2
+                                class="mt-5 max-w-6xl text-[clamp(4rem,9vw,9rem)] font-extrabold leading-[.82] tracking-[-0.05em]">
+                                Cuidar con<br>
+                                Sentido
+                            </h2>
+
+                            <div class="mt-10 grid gap-8 border-t border-black/10 pt-8 md:grid-cols-3">
+
+                                <div>
+                                    <p class="text-xs uppercase tracking-[0.2em] text-black/40">
+                                        Proyecto
+                                    </p>
+
+                                    <p class="mt-2 text-lg">
+                                        Diseño de sitio web
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <p class="text-xs uppercase tracking-[0.2em] text-black/40">
+                                        Mi rol
+                                    </p>
+
+                                    <p class="mt-2 text-lg">
+                                        UX/UI · Diseño web · Frontend
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <p class="text-xs uppercase tracking-[0.2em] text-black/40">
+                                        Tipo
+                                    </p>
+
+                                    <p class="mt-2 text-lg">
+                                        Plataforma web
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- IMAGEN -->
+
+                    <div class="px-6 md:px-10">
+
+                        <div class="mx-auto max-w-[1800px] overflow-hidden bg-black">
+
+                            <img src="img/proyectos/cuidar.png" alt="Sitio web Cuidar con Sentido"
+                                class="h-auto w-full">
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- DESCRIPCIÓN -->
+
+                    <div class="px-6 py-24 md:px-10 md:py-32">
+
+                        <div class="mx-auto grid max-w-[1400px] gap-12 md:grid-cols-12">
+
+                            <div class="md:col-span-4">
+
+                                <p class="text-xs uppercase tracking-[0.3em] text-[#FF6700]">
+                                    El proyecto
+                                </p>
+
+                            </div>
+
+                            <div class="md:col-span-8">
+
+                                <p class="max-w-4xl text-2xl font-light leading-[1.35] md:text-4xl">
+                                    Diseño de una experiencia web para una organización
+                                    que acompaña a personas con discapacidad, sus familias
+                                    y cuidadores desde la medicina familiar, la psicología
+                                    y la inclusión social.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ENFOQUE -->
+
+                    <div class="bg-[#111111] px-6 py-24 text-white md:px-10 md:py-32">
+
+                        <div class="mx-auto max-w-[1400px]">
+
+                            <p class="text-xs uppercase tracking-[0.3em] text-[#FF6700]">
+                                El enfoque
+                            </p>
+
+                            <h3 class="mt-5 max-w-5xl text-4xl font-bold leading-[.95] md:text-7xl">
+                                Una experiencia digital centrada en acompañar.
+                            </h3>
+
+                            <div class="mt-16 grid gap-6 md:grid-cols-3">
+
+                                <div class="border border-white/20 p-7 md:p-10">
+
+                                    <span class="text-5xl font-bold text-[#FF6700]">
+                                        01
+                                    </span>
+
+                                    <h4 class="mt-10 text-2xl font-bold">
+                                        Orientar
+                                    </h4>
+
+                                    <p class="mt-4 font-light leading-[1.5] text-white/70">
+                                        Organizar la información para que las personas
+                                        encuentren rápidamente el tipo de acompañamiento
+                                        que necesitan.
+                                    </p>
+
+                                </div>
+
+
+                                <div class="border border-white/20 p-7 md:p-10">
+
+                                    <span class="text-5xl font-bold text-[#FF6700]">
+                                        02
+                                    </span>
+
+                                    <h4 class="mt-10 text-2xl font-bold">
+                                        Conectar
+                                    </h4>
+
+                                    <p class="mt-4 font-light leading-[1.5] text-white/70">
+                                        Facilitar el contacto entre usuarios, familias,
+                                        cuidadores y profesionales.
+                                    </p>
+
+                                </div>
+
+
+                                <div class="border border-white/20 p-7 md:p-10">
+
+                                    <span class="text-5xl font-bold text-[#FF6700]">
+                                        03
+                                    </span>
+
+                                    <h4 class="mt-10 text-2xl font-bold">
+                                        Acompañar
+                                    </h4>
+
+                                    <p class="mt-4 font-light leading-[1.5] text-white/70">
+                                        Presentar una ruta clara hacia valoración,
+                                        acompañamiento y servicios.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- EXPERIENCIA -->
+
+                    <div class="px-6 py-24 md:px-10 md:py-32">
+
+                        <div class="mx-auto max-w-[1600px]">
+
+                            <p class="text-xs uppercase tracking-[0.3em] text-[#FF6700]">
+                                Experiencia de usuario
+                            </p>
+
+                            <h3 class="mt-5 max-w-5xl text-4xl font-bold md:text-6xl">
+                                Una estructura pensada para encontrar ayuda de forma clara.
+                            </h3>
+
+                            <div class="mt-16 grid gap-6 md:grid-cols-2">
+
+                                <div class="bg-[#F7F7F7] p-8 md:p-12">
+
+                                    <p class="text-5xl font-bold text-[#FF6700]">
+                                        01
+                                    </p>
+
+                                    <h4 class="mt-10 text-3xl font-bold">
+                                        Información
+                                    </h4>
+
+                                    <p class="mt-4 max-w-lg text-lg font-light leading-[1.5]">
+                                        Presentación clara de los servicios,
+                                        el enfoque y las diferentes áreas de acompañamiento.
+                                    </p>
+
+                                </div>
+
+
+                                <div class="bg-[#F7F7F7] p-8 md:p-12">
+
+                                    <p class="text-5xl font-bold text-[#FF6700]">
+                                        02
+                                    </p>
+
+                                    <h4 class="mt-10 text-3xl font-bold">
+                                        Ruta de atención
+                                    </h4>
+
+                                    <p class="mt-4 max-w-lg text-lg font-light leading-[1.5]">
+                                        Una estructura que permite entender el proceso
+                                        de acompañamiento y los siguientes pasos.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- GALERÍA -->
+
+                    <div class="px-6 pb-24 md:px-10 md:pb-32">
+
+                        <div class="mx-auto max-w-[1600px]">
+
+                            <p class="text-xs uppercase tracking-[0.3em] text-[#FF6700]">
+                                Diseño web
+                            </p>
+
+                            <h3 class="mt-5 text-4xl font-bold md:text-6xl">
+                                Diseño, estructura y experiencia.
+                            </h3>
+
+                            <a href="https://cuidarconsentido.com/" target="_blank" rel="noopener noreferrer"
+                                class="mt-10 inline-flex items-center gap-4 border border-black px-6 py-4 text-sm font-medium uppercase tracking-[0.15em] transition duration-300 hover:bg-black hover:text-white">
+
+                                Visitar sitio
+
+                                <span>↗</span>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CIERRE -->
+
+                    <div class="bg-[#FF6700] px-6 py-24 md:px-10 md:py-32">
+
+                        <div class="mx-auto max-w-[1400px]">
+
+                            <p class="text-xs uppercase tracking-[0.3em] text-black/60">
+                                Proyecto 04
+                            </p>
+
+                            <h3
+                                class="mt-5 max-w-5xl text-5xl font-extrabold leading-[.9] tracking-[-0.04em] md:text-8xl">
+                                Cuidar con Sentido.
+                            </h3>
+
+                            <button type="button" onclick="closeProject('project04')"
+                                class="mt-12 flex items-center gap-4 border border-black px-6 py-4 text-sm font-medium uppercase tracking-[0.15em] transition duration-300 hover:bg-black hover:text-white">
+
+                                Volver a proyectos
+
+                                <span>↑</span>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 SOBRE MÍ
+            ================================================== -->
+
+            <section id="sobre-mi" class="min-h-screen bg-[#F7F7F7] px-6 py-28 md:px-16 lg:px-20">
+
+                <div class="mx-auto grid max-w-[1600px] items-center gap-16 lg:grid-cols-2">
+
+                    <div>
+
+                        <p class="mb-5 text-xs uppercase tracking-[0.35em] text-[#FF6700] md:text-sm">
+                            Sobre mí
+                        </p>
+
+
+                        <h2 class="text-[clamp(4rem,8vw,8rem)] font-extrabold leading-[.85] tracking-[-0.04em]">
+                            Diseñar.
+                        </h2>
+
+                    </div>
+
+
+                    <div>
+
+                        <p class="max-w-2xl text-2xl font-light leading-[1.4] md:text-3xl">
+                            Soy diseñador digital y creativo.
+                            Me interesa crear experiencias que
+                            conecten
+
+                            <strong class="font-extrabold">
+                                diseño, tecnología y creatividad.
+                            </strong>
+                        </p>
+
+
+                        <p class="mt-8 max-w-2xl text-2xl font-light leading-[1.4] md:text-3xl">
+                            Trabajo entre el mundo visual y el
+                            desarrollo web, buscando que cada
+                            idea tenga una buena experiencia
+                            detrás.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 CONTACTO
+            ================================================== -->
+
+            <section id="contacto"
+                class="flex min-h-[80vh] flex-col justify-between bg-[#111111] px-6 py-28 text-white md:px-16 lg:px-20">
+
+                <div>
+
+                    <p class="mb-5 text-xs uppercase tracking-[0.35em] text-[#FF6700] md:text-sm">
+                        ¿Hablamos?
+                    </p>
+
+
+                    <h2 class="max-w-5xl text-[clamp(4rem,9vw,9rem)] font-extrabold leading-[.85] tracking-[-0.04em]">
+                        Hagamos algo
+                        increíble.
+                    </h2>
+
+
+                    <a href="mailto:jhonatan.stw@gmail.com"
+                        class="mt-16 inline-block border-b-2 border-[#FF6700] pb-2 text-[clamp(1.5rem,4vw,3.5rem)] text-[#FF6700]">
+                        jhonatan.stw@gmail.com
+                    </a>
+
+                </div>
+
+
+                <div
+                    class="mt-20 flex flex-col justify-between gap-5 text-xs uppercase tracking-[0.25em] text-white/70 md:flex-row">
+
+                    <p>
+                        Bogotá, Colombia
+                    </p>
+
+
+                    <p>
+                        © 2026 Jhonatan Arévalo
+                    </p>
+
+                </div>
+
+            </section>
+
+
+        </main>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         MENÚ OVERLAY
+    ====================================================== -->
+
+    <div id="menuOverlay"
+        class="menu-overlay fixed left-5 right-5 top-5 bottom-5 z-[1000] overflow-hidden bg-[#FF6700]">
+
+        <div class="flex h-full flex-col p-6 md:p-10">
+
+
+            <!-- =================================================
+                 HEADER DEL MENÚ
+            ================================================== -->
+
+            <div class="flex items-center justify-between">
+
+
+                <!-- CERRAR -->
+
+                <button id="closeMenu" type="button" aria-label="Cerrar menú"
+                    class="flex cursor-pointer items-center gap-4 bg-transparent">
+
+                    <!-- X -->
+
+                    <span class="relative flex h-12 w-12 items-center justify-center md:h-14 md:w-14">
+
+                        <span class="absolute h-1 w-9 rotate-45 rounded-full bg-[#111111] md:w-10"></span>
+
+                        <span class="absolute h-1 w-9 -rotate-45 rounded-full bg-[#111111] md:w-10"></span>
+
+                    </span>
+
+
+                    <span class="h-8 w-px bg-black/40 md:h-9"></span>
+
+
+                    <span class="text-xs font-bold uppercase tracking-[0.35em]">
+                        Cerrar
+                    </span>
+
+                </button>
+
+
+
+                <!-- CONTACTO -->
+
+                <a href="mailto:jhonatan.stw@gmail.com"
+                    class="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.25em]">
+
+                    <span class="flex h-8 w-8 items-center justify-center rounded-full border-2 border-[#111111]">
+                        @
+                    </span>
+
+
+                    <span class="hidden md:block">
+                        Contáctame
+                    </span>
+
+                </a>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 REDES
+            ================================================== -->
+
+            <div class="mt-12 flex items-center gap-2">
+
+                <span class="mr-3 h-[3px] w-14 bg-[#111111] md:w-20"></span>
+
+
+                <a href="https://www.instagram.com/jhonatan_stw/" target="_blank" rel="noopener noreferrer"
+                    class="social-link flex h-11 w-11 items-center justify-center rounded-full text-xs font-extrabold">
+                    IG
+                </a>
+
+
+                <a href="https://www.linkedin.com/in/jhonatan-stiven-arevalo-chaves-5293861b6/?isSelfProfile=true"
+                    target="_blank" rel="noopener noreferrer"
+                    class="social-link flex h-11 w-11 items-center justify-center rounded-full text-xs font-extrabold">
+                    LI
+                </a>
+
+
+                <a href="#"
+                    class="social-link hidden h-11 w-11 items-center justify-center rounded-full text-xs font-extrabold">
+                    GH
+                </a>
+
+                <a href="#"
+                    class="social-link hidden h-11 w-11 items-center justify-center rounded-full text-xs font-extrabold">
+                    BE
+                </a>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 NAVEGACIÓN
+            ================================================== -->
+
+            <nav class="flex flex-1 flex-col justify-center gap-8 md:gap-10">
+
+
+                <!-- INICIO -->
+
+                <a href="#inicio" data-menu-link
+                    class="menu-item flex w-fit flex-col items-start gap-2 md:flex-row md:items-baseline md:gap-20">
+
+                    <span class="text-[clamp(3.3rem,7vw,6.5rem)] font-extrabold leading-[.9]">
+                        Inicio
+                    </span>
+
+
+                    <span class="text-sm opacity-80 md:text-lg">
+                        Volver al inicio.
+                    </span>
+
+                </a>
+
+
+
+                <!-- TRABAJO -->
+
+                <a href="#trabajo" data-menu-link
+                    class="menu-item flex w-fit flex-col items-start gap-2 md:flex-row md:items-baseline md:gap-20">
+
+                    <span class="text-[clamp(3.3rem,7vw,6.5rem)] font-extrabold leading-[.9]">
+                        Trabajo
+                    </span>
+
+
+                    <span class="text-sm opacity-80 md:text-lg">
+                        Algunos de mis proyectos.
+                    </span>
+
+                </a>
+
+
+
+                <!-- SOBRE MÍ -->
+
+                <a href="#sobre-mi" data-menu-link
+                    class="menu-item flex w-fit flex-col items-start gap-2 md:flex-row md:items-baseline md:gap-20">
+
+                    <span class="text-[clamp(3.3rem,7vw,6.5rem)] font-extrabold leading-[.9]">
+                        Sobre mí
+                    </span>
+
+
+                    <span class="text-sm opacity-80 md:text-lg">
+                        Conoce un poco más sobre mí.
+                    </span>
+
+                </a>
+
+
+
+                <!-- CONTACTO -->
+
+                <a href="#contacto" data-menu-link
+                    class="menu-item flex w-fit flex-col items-start gap-2 md:flex-row md:items-baseline md:gap-20">
+
+                    <span class="text-[clamp(3.3rem,7vw,6.5rem)] font-extrabold leading-[.9]">
+                        Contacto
+                    </span>
+
+
+                    <span class="text-sm opacity-80 md:text-lg">
+                        Hablemos de tu próximo proyecto.
+                    </span>
+
+                </a>
+
+            </nav>
+
+
+
+            <!-- =================================================
+                 FOOTER MENU
+            ================================================== -->
+
+            <div
+                class="flex flex-col gap-3 text-[10px] uppercase tracking-[0.25em] md:flex-row md:items-center md:justify-between">
+
+                <p>
+                    Bogotá, Colombia
+                </p>
+
+
+                <p>
+                    © 2026 Jhonatan Arévalo
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            () => {
+
+
+                /* =================================================
+                   ELEMENTOS
+                ================================================== */
+
+                const loader =
+                    document.getElementById("loader");
+
+
+                const scrollArea =
+                    document.getElementById("scrollArea");
+
+
+                const openMenu =
+                    document.getElementById("openMenu");
+
+
+                const closeMenu =
+                    document.getElementById("closeMenu");
+
+
+                const menuOverlay =
+                    document.getElementById("menuOverlay");
+
+
+                const menuLinks =
+                    document.querySelectorAll(
+                        "[data-menu-link]"
+                    );
+
+
+                /* =================================================
+                   LOADER
+                ================================================== */
+
+                window.addEventListener(
+                    "load",
+                    () => {
+
+                        setTimeout(
+                            () => {
+
+                                loader.classList.add(
+                                    "opacity-0"
+                                );
+
+
+                                setTimeout(
+                                    () => {
+
+                                        loader.style.display =
+                                            "none";
+
+                                    },
+                                    700
+                                );
+
+                            },
+                            1200
+                        );
+
+                    }
+                );
+
+
+                /* =================================================
+                   ABRIR MENÚ
+                ================================================== */
+
+                openMenu.addEventListener(
+                    "click",
+                    () => {
+
+                        menuOverlay.classList.add(
+                            "open"
+                        );
+
+                    }
+                );
+
+
+                /* =================================================
+                   CERRAR MENÚ
+                ================================================== */
+
+                closeMenu.addEventListener(
+                    "click",
+                    () => {
+
+                        menuOverlay.classList.remove(
+                            "open"
+                        );
+
+                    }
+                );
+
+
+                /* =================================================
+                   LINKS DEL MENÚ
+                ================================================== */
+
+                menuLinks.forEach(
+                    (link) => {
+
+                        link.addEventListener(
+                            "click",
+                            (event) => {
+
+                                event.preventDefault();
+
+
+                                const targetId =
+                                    link.getAttribute(
+                                        "href"
+                                    );
+
+
+                                const target =
+                                    document.querySelector(
+                                        targetId
+                                    );
+
+
+                                if (!target) {
+                                    return;
+                                }
+
+
+                                /* Cerrar menú */
+
+                                menuOverlay.classList.remove(
+                                    "open"
+                                );
+
+
+                                /* Esperar animación */
+
+                                setTimeout(
+                                    () => {
+
+                                        const position =
+                                            target.offsetTop;
+
+
+                                        scrollArea.scrollTo(
+                                            {
+                                                top: position,
+                                                behavior: "smooth"
+                                            }
+                                        );
+
+                                    },
+                                    500
+                                );
+
+                            }
+                        );
+
+                    }
+                );
+
+
+                /* =================================================
+                   ESC
+                ================================================== */
+
+                document.addEventListener(
+                    "keydown",
+                    (event) => {
+
+                        if (
+                            event.key === "Escape" &&
+                            menuOverlay.classList.contains("open")
+                        ) {
+
+                            menuOverlay.classList.remove(
+                                "open"
+                            );
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           SCROLL HACIA SECCIÓN
+        ====================================================== */
+
+        function scrollToSection(sectionId) {
+
+            const scrollArea =
+                document.getElementById(
+                    "scrollArea"
+                );
+
+
+            const target =
+                document.getElementById(
+                    sectionId
+                );
+
+
+            if (
+                !scrollArea ||
+                !target
+            ) {
+                return;
+            }
+
+
+            scrollArea.scrollTo(
+                {
+                    top: target.offsetTop,
+                    behavior: "smooth"
+                }
+            );
+
+        }
+
+
+
+        // =================================================
+        // CASE STUDY - PROYECTO 01
+        // =================================================
+
+        const projectCards = document.querySelectorAll("[data-project]");
+
+
+        // =================================================
+        // ABRIR PROYECTO
+        // =================================================
+
+        projectCards.forEach((card) => {
+
+            card.addEventListener("click", () => {
+
+                const projectId = card.dataset.project;
+
+                openProject(projectId);
+
+            });
+
+        });
+
+
+        function openProject(projectId) {
+
+            const project = document.getElementById(projectId);
+
+            if (!project) return;
+
+
+            project.classList.remove("hidden");
+
+            document.body.classList.add("overflow-hidden");
+
+
+            const scrollContainer =
+                document.getElementById(projectId + "Scroll");
+
+
+            if (scrollContainer) {
+
+                scrollContainer.scrollTop = 0;
+
+            }
+
+        }
+
+
+        // =================================================
+        // CERRAR PROYECTO
+        // =================================================
+
+        function closeProject(projectId) {
+
+            const project = document.getElementById(projectId);
+
+            if (!project) return;
+
+
+            project.classList.add("hidden");
+
+            document.body.classList.remove("overflow-hidden");
+
+        }
+
+
+        // =================================================
+        // ESC PARA CERRAR
+        // =================================================
+
+        document.addEventListener("keydown", (event) => {
+
+            if (event.key !== "Escape") return;
+
+
+            document.querySelectorAll("[id^='project0']").forEach((project) => {
+
+                if (!project.classList.contains("hidden")) {
+
+                    closeProject(project.id);
+
+                }
+
+            });
+
+        });
+
+
+
+    </script>
+
+
+</body>
+
+</html>
