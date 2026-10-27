@@ -361,16 +361,25 @@
                      CONTACTO
                 ================================================== -->
 
-                <a href="mailto:jhonatan.stw@gmail.com"
-                    class="flex items-center gap-2 text-sm font-medium md:gap-3 md:text-[21px]">
+                <div class="flex items-center gap-4 md:gap-7">
 
-                    <span class="h-3 w-3 rounded-full bg-[#FF6700] md:h-[22px] md:w-[22px]"></span>
+                    <button id="languageToggle" type="button" lang="en" aria-label="Switch language to English"
+                        class="flex items-center gap-1 rounded-full border border-black/15 bg-white/70 p-1 text-xs font-bold tracking-wider md:text-sm">
+                        <span data-lang-option="es" class="rounded-full bg-[#FF6700] px-2.5 py-1.5 text-white md:px-3">ES</span>
+                        <span data-lang-option="en" class="rounded-full px-2.5 py-1.5 text-black/60 md:px-3">EN</span>
+                    </button>
 
-                    <span>
-                        Contáctame
-                    </span>
+                    <a href="mailto:jhonatan.stw@gmail.com"
+                        class="flex items-center gap-2 text-sm font-medium md:gap-3 md:text-[21px]">
 
-                </a>
+                        <span class="h-3 w-3 rounded-full bg-[#FF6700] md:h-[22px] md:w-[22px]"></span>
+
+                        <span>
+                            Contáctame
+                        </span>
+
+                    </a>
+                </div>
 
             </div>
 
@@ -1981,6 +1990,14 @@
                             detrás.
                         </p>
 
+                        <div class="mt-10 flex flex-wrap gap-4">
+                            <a href="cv/index.html"
+                                class="inline-flex items-center gap-3 bg-[#FF6700] px-6 py-4 text-sm font-medium text-white transition duration-300 hover:bg-[#111111]">
+                                <span>Ver mi CV</span>
+                                <span aria-hidden="true">↗</span>
+                            </a>
+                        </div>
+
                     </div>
 
                 </div>
@@ -2244,6 +2261,202 @@
     </div>
 
 
+
+
+    <!-- =====================================================
+         LANGUAGE SWITCHER — SPANISH / ENGLISH
+    ====================================================== -->
+    <script>
+    (() => {
+        const translations = {
+        "Menú": "Menu",
+        "Contáctame": "Contact me",
+        "Ver mi CV": "View my CV",
+        "Hola, soy": "Hi, I’m",
+        "Diseñador digital y creativo": "Digital designer and creative",
+        "de Bogotá.": "based in Bogotá.",
+        "Creo experiencias digitales donde el diseño y la tecnología se encuentran.": "I create digital experiences where design and technology come together.",
+        "Mi trabajo": "My work",
+        "Proyectos": "Projects",
+        "Una selección de proyectos donde diseño, creatividad y tecnología trabajan juntos.": "A selection of projects where design, creativity, and technology work together.",
+        "01 / CAMPAÑA DIGITAL": "01 / DIGITAL CAMPAIGN",
+        "Descubre tu disfraz ideal": "Discover your ideal costume",
+        "Descubre tu": "Discover your",
+        "disfraz ideal": "ideal costume",
+        "Experiencia digital interactiva creada para la campaña de Halloween de Seguros Bolívar.": "An interactive digital experience created for Seguros Bolívar’s Halloween campaign.",
+        "Experiencia digital": "Digital experience",
+        "Dirección de arte": "Art direction",
+        "02 / CAMPAÑA DIGITAL": "02 / DIGITAL CAMPAIGN",
+        "Autos": "Cars",
+        "Experiencia digital para explicar de forma sencilla el proceso de reparación de un vehículo a través del seguro.": "A digital experience that clearly explains the vehicle repair process covered by insurance.",
+        "Diseño digital": "Digital design",
+        "Animación": "Animation",
+        "03 / WEB": "03 / WEBSITE",
+        "Diseño y desarrollo de una experiencia web para una compañía de creación audiovisual con inteligencia artificial.": "Design and development of a web experience for an AI-powered audiovisual production company.",
+        "Diseño web": "Web design",
+        "Frontend": "Frontend",
+        "04 / WEB": "04 / WEBSITE",
+        "Diseño de una plataforma web para facilitar el acceso a servicios de acompañamiento y apoyo psicológico.": "Design of a web platform that helps people access guidance and psychological support services.",
+        "Volver": "Back",
+        "Proyecto": "Project",
+        "Campaña de Halloween": "Halloween campaign",
+        "Mi rol": "My role",
+        "UX/UI · Diseño digital · Dirección de arte": "UX/UI · Digital design · Art direction",
+        "Tipo": "Type",
+        "Experiencia interactiva": "Interactive experience",
+        "El proyecto": "The project",
+        "Una experiencia digital creada para la campaña de Halloween de Seguros Bolívar. El usuario responde diferentes preguntas para descubrir cuál sería su disfraz ideal.": "A digital experience created for Seguros Bolívar’s Halloween campaign. Users answer a series of questions to discover their ideal costume.",
+        "La experiencia": "The experience",
+        "Convertir una campaña en una experiencia.": "Turning a campaign into an experience.",
+        "Conocer": "Learn",
+        "El usuario comienza respondiendo preguntas para definir el contexto de la experiencia.": "Users begin by answering questions that establish the context for the experience.",
+        "Interactuar": "Interact",
+        "La experiencia utiliza diferentes decisiones para construir el resultado.": "The experience uses the user’s choices to build a personalized result.",
+        "Descubrir": "Discover",
+        "El usuario obtiene el resultado de su disfraz ideal dentro de la experiencia.": "Users discover their ideal costume at the end of the experience.",
+        "Diseño": "Design",
+        "Una experiencia pensada para Halloween.": "An experience designed for Halloween.",
+        "Proyecto 01": "Project 01",
+        "Descubre tu disfraz ideal.": "Discover your ideal costume.",
+        "Volver a proyectos": "Back to projects",
+        "Campaña de autos": "Automotive campaign",
+        "UX/UI · Diseño digital · Animación": "UX/UI · Digital design · Animation",
+        "Una experiencia digital creada para explicar de manera sencilla el proceso que debe seguir un cliente cuando necesita reparar su vehículo utilizando su seguro.": "A digital experience that clearly explains the steps customers follow to repair their vehicle through their insurance.",
+        "El proceso": "The process",
+        "Hacer fácil de entender un proceso complejo.": "Making a complex process easy to understand.",
+        "Reportar": "Report",
+        "El usuario identifica el proceso que debe iniciar después de un incidente.": "Users learn which process to start after an incident.",
+        "Reparar": "Repair",
+        "Se explica visualmente el proceso relacionado con la reparación del vehículo.": "The vehicle repair process is explained visually.",
+        "Continuar": "Continue",
+        "La experiencia orienta al usuario hacia los siguientes pasos.": "The experience guides users through the next steps.",
+        "Diseño y animación": "Design and animation",
+        "Una experiencia visual para explicar el proceso.": "A visual experience that explains the process.",
+        "Proyecto 02": "Project 02",
+        "Una experiencia para entender el proceso.": "An experience that makes the process easier to understand.",
+        "Diseño de sitio web": "Website design",
+        "UX/UI · Diseño web · Frontend": "UX/UI · Web design · Frontend",
+        "Sitio web": "Website",
+        "Diseño y desarrollo de una experiencia web para Filmorae, un estudio audiovisual que combina creatividad, tecnología e inteligencia artificial para crear contenido con lenguaje cinematográfico.": "Design and development of a web experience for Filmorae, an audiovisual studio combining creativity, technology, and artificial intelligence to create cinematic content.",
+        "La propuesta": "The approach",
+        "Una web donde la tecnología y el lenguaje cinematográfico se encuentran.": "A website where technology meets cinematic storytelling.",
+        "Identidad": "Identity",
+        "Construir una presencia digital coherente con el carácter audiovisual de la marca.": "Build a digital presence that reflects the brand’s audiovisual character.",
+        "Portafolio": "Portfolio",
+        "Dar protagonismo a los proyectos audiovisuales y facilitar su exploración.": "Showcase audiovisual projects and make them easy to explore.",
+        "Tecnología": "Technology",
+        "Presentar la inteligencia artificial como parte del lenguaje creativo del estudio.": "Present artificial intelligence as part of the studio’s creative language.",
+        "Una experiencia visual construida alrededor del contenido.": "A visual experience built around the content.",
+        "Visitar sitio": "Visit website",
+        "Proyecto 03": "Project 03",
+        "Filmorae.": "Filmorae.",
+        "Cuidar con": "Caring with",
+        "Sentido": "Purpose",
+        "Plataforma web": "Web platform",
+        "Diseño de una experiencia web para una organización que acompaña a personas con discapacidad, sus familias y cuidadores desde la medicina familiar, la psicología y la inclusión social.": "Design of a web experience for an organization supporting people with disabilities, their families, and caregivers through family medicine, psychology, and social inclusion.",
+        "El enfoque": "The focus",
+        "Una experiencia digital centrada en acompañar.": "A digital experience centered on support.",
+        "Orientar": "Guide",
+        "Organizar la información para que las personas encuentren rápidamente el tipo de acompañamiento que necesitan.": "Organize information so people can quickly find the support they need.",
+        "Conectar": "Connect",
+        "Facilitar el contacto entre usuarios, familias, cuidadores y profesionales.": "Make it easier for users, families, caregivers, and professionals to connect.",
+        "Acompañar": "Support",
+        "Presentar una ruta clara hacia valoración, acompañamiento y servicios.": "Provide a clear path to assessment, support, and services.",
+        "Experiencia de usuario": "User experience",
+        "Una estructura pensada para encontrar ayuda de forma clara.": "A structure designed to help people find support easily.",
+        "Información": "Information",
+        "Presentación clara de los servicios, el enfoque y las diferentes áreas de acompañamiento.": "A clear presentation of services, the approach, and the different areas of support.",
+        "Ruta de atención": "Care pathway",
+        "Una estructura que permite entender el proceso de acompañamiento y los siguientes pasos.": "A structure that explains the support process and the next steps.",
+        "Diseño, estructura y experiencia.": "Design, structure, and experience.",
+        "Proyecto 04": "Project 04",
+        "Cuidar con Sentido.": "Cuidar con Sentido.",
+        "Sobre mí": "About me",
+        "Diseñar.": "Design.",
+        "Soy diseñador digital y creativo. Me interesa crear experiencias que conecten": "I’m a digital designer and creative. I’m interested in creating experiences that connect",
+        "diseño, tecnología y creatividad.": "design, technology, and creativity.",
+        "Trabajo entre el mundo visual y el desarrollo web, buscando que cada idea tenga una buena experiencia detrás.": "I work across visual design and web development, making sure every idea is backed by a thoughtful user experience.",
+        "¿Hablamos?": "Let’s talk",
+        "Hagamos algo": "Let’s create something",
+        "increíble.": "incredible.",
+        "Bogotá, Colombia": "Bogotá, Colombia",
+        "Cerrar": "Close",
+        "Inicio": "Home",
+        "Volver al inicio.": "Back to the beginning.",
+        "Trabajo": "Work",
+        "Algunos de mis proyectos.": "Some of my projects.",
+        "Conoce un poco más sobre mí.": "Get to know me a little better.",
+        "Contacto": "Contact",
+        "Hablemos de tu próximo proyecto.": "Let’s talk about your next project."
+};
+        const languageToggle = document.getElementById("languageToggle");
+        if (!languageToggle) return;
+
+        const normalize = (value) => value.replace(/\s+/g, " ").trim();
+        const originalTitle = "Jhonatan Arévalo — Diseñador Digital";
+        const originalAlt = {
+            "Ilustración de Jhonatan Arévalo": "Illustration of Jhonatan Arévalo",
+            "Campaña de Halloween Seguros Bolívar": "Seguros Bolívar Halloween campaign",
+            "Campaña de Autos Seguros Bolívar": "Seguros Bolívar car campaign",
+            "Sitio web Filmorae": "Filmorae website",
+            "Sitio web Cuidar con Sentido": "Cuidar con Sentido website",
+            "Experiencia interactiva Halloween - Seguros Bolívar": "Interactive Halloween experience - Seguros Bolívar"
+        };
+
+        // Capture all original text nodes once; this makes ES ⇄ EN switching reversible without reloading.
+        const originalNodes = [];
+        const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+        let current;
+        while ((current = walker.nextNode())) {
+            if (current.nodeValue.trim()) originalNodes.push([current, current.nodeValue]);
+        }
+        function applyLanguage(language) {
+            const isEnglish = language === "en";
+            originalNodes.forEach(([node, original]) => {
+                if (!node.isConnected) return;
+                const key = normalize(original);
+                if (isEnglish && Object.prototype.hasOwnProperty.call(translations, key)) {
+                    const leading = original.match(/^\s*/)?.[0] || "";
+                    const trailing = original.match(/\s*$/)?.[0] || "";
+                    node.nodeValue = leading + translations[key] + trailing;
+                } else {
+                    node.nodeValue = original;
+                }
+            });
+            setLanguageAttributes(language);
+        }
+        function setLanguageAttributes(language) {
+            const isEnglish = language === "en";
+            document.documentElement.lang = language;
+            document.title = isEnglish ? "Jhonatan Arévalo — Digital Designer" : originalTitle;
+            document.querySelectorAll("img[alt]").forEach((img) => {
+                if (!img.dataset.altEs) img.dataset.altEs = img.getAttribute("alt");
+                img.setAttribute("alt", isEnglish ? (originalAlt[img.dataset.altEs] || img.dataset.altEs) : img.dataset.altEs);
+            });
+            const closeMenu = document.getElementById("closeMenu");
+            if (closeMenu) closeMenu.setAttribute("aria-label", isEnglish ? "Close menu" : "Cerrar menú");
+            const openMenu = document.getElementById("openMenu");
+            if (openMenu) openMenu.setAttribute("aria-label", isEnglish ? "Open menu" : "Abrir menú");
+            const halloweenFrame = document.querySelector('iframe[src*="4820-halloween-2023"]');
+            if (halloweenFrame) halloweenFrame.setAttribute("title", isEnglish ? "Interactive Halloween experience - Seguros Bolívar" : "Experiencia interactiva Halloween - Seguros Bolívar");
+            languageToggle.setAttribute("aria-label", isEnglish ? "Switch language to Spanish" : "Switch language to English");
+            languageToggle.querySelectorAll("[data-lang-option]").forEach((option) => {
+                const active = option.dataset.langOption === language;
+                option.classList.toggle("bg-[#FF6700]", active);
+                option.classList.toggle("text-white", active);
+                option.classList.toggle("text-black/60", !active);
+            });
+            try { localStorage.setItem("portfolio-language", language); } catch (error) {}
+        }
+        languageToggle.addEventListener("click", () => {
+            const next = document.documentElement.lang === "en" ? "es" : "en";
+            applyLanguage(next);
+        });
+        let initialLanguage = "es";
+        try { initialLanguage = localStorage.getItem("portfolio-language") || "es"; } catch (error) {}
+        applyLanguage(initialLanguage);
+    })();
+    </script>
 
     <!-- =====================================================
          JAVASCRIPT
